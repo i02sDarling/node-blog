@@ -38,7 +38,7 @@ function getMsg(id){
         next,
         nextURL,
         date,
-        title:"hh",
+        title,
         description,
         content,
         pay

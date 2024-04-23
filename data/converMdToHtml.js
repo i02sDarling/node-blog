@@ -1,6 +1,6 @@
 const fs = require('fs');
 const marked = require('marked');
-const originData = require('./mockdata1');
+const originData = require('./originData');
 
 function convert() {
     const content = [];

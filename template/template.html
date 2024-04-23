@@ -1561,39 +1561,7 @@
     <div class=sp-progress style=opacity:0></div>
     <div id=wrap>
         <span id=backtop class="waves-effect waves-button"><i class="fa fa-angle-up"></i></span>
-        <header>
-            <a id=toggle-nav class="btn btn-primary sf-hidden" href=javascript:void(0)></a>
-            <nav id=site-navigation class="sidebar no-user-select sf-hidden" role=navigation>
-
-            </nav>
-            <nav id=navbar class="navbar navbar-expand-md navbar-color fixed-top no-user-select navbar-lg">
-                <div class=container-fluid>
-                    <a class=navbar-brand href=/ />
-                    <icon class="navbar-brand" href="/"><img src="./DeepColor02sDarling.svg" alt="Icon"></icon></a>
-                    <button class="navbar-toggler sf-hidden" type=button data-toggle=collapse
-                        data-target=#navbarCollapse aria-controls=navbarCollapse aria-expanded=false
-                        aria-label="Toggle navigation">
-
-                    </button>
-                    <div class="collapse navbar-collapse" id=navbarCollapse>
-                        <ul class="navbar-nav mr-auto">
-                            <li class=nav-item><a class=nav-link href=/ />首页</a></li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href=${note} id=dashboard-dropdown role=button
-                                    data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-                                    笔记甄选 </a>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href=${day_sentence} id=dashboard-dropdown role=button
-                                    data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-                                    每日一句 </a>
-                            </li>
-                            <li class=nav-item><a class=nav-link href=${core} />精选</a></li>
-                            <li class=nav-item><a class=nav-link href=${hot} />热门</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-        </header>
+        ${component_header}
 
         <div id=body>
             <style class=sf-hidden>

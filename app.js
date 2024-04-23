@@ -7,16 +7,17 @@ const staticPath='./template/static'
 const app = new koa();
 const getPage=require('./data/getPage.js')
 const getArticle=require('./data/getArticleMsg.js')
-const template=require('./template/template.js')(path.join('./template/template.html'))
+const indexTemplate=require('./template/template.js')(path.join('./template/template.html'))
 const articleTemplate=require('./template/template.js')(path.join('./template/article.html'))
 
+const header=fs.readFileSync('./template/header.txt','utf-8');
 
 app.use(
     serveStatic(path.join(__dirname, staticPath))
 );
 
 app.use(
-    mount('/resume',serveStatic(path.join(__dirname, staticPath,'resume.pdf')))
+    mount('/resume',serveStatic(path.join(__dirname, staticPath,'resume.html')))
 );
 app.use(
     mount('/svg',serveStatic(path.join(__dirname, staticPath,'nodejs.html')))
@@ -24,8 +25,9 @@ app.use(
 
 app.use(async (ctx, next) => {
     if (ctx.url === '/resume') {
-        ctx.type = 'application/pdf';
-        ctx.body = fs.readFileSync(path.join(__dirname, staticPath,'resume.pdf'));
+        
+        // ctx.body = fs.readFileSync(path.join(__dirname, staticPath,'resume.pdf'));
+        ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'resume.html'),'utf-8');
     } else if(ctx.url==='/svg'){
         ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'nodejs.html'),'utf-8')
     }
@@ -42,7 +44,8 @@ app.use(
         }
         else{
             article=getArticle(req);
-            ctx.body=articleTemplate({article});
+            component_header=header;
+            ctx.body=articleTemplate({article,component_header});
         }
 
     })
@@ -58,9 +61,10 @@ app.use(
             templateParams[`Title${num}`] = data.title;
             templateParams[`Date${num}`] = data.date;
             templateParams[`Tag${num}`] = 'note';
-            templateParams[`URL${num}`] = null;
+            templateParams[`URL${num}`] = '/article?articleId='+data.id;
         }); 
-        ctx.body =template(templateParams)
+        templateParams[`component_header`]=header;
+        ctx.body =indexTemplate(templateParams)
         
     })
 );

@@ -21,3 +21,5 @@ function createTemplate(templatePath) {
 }
 
 module.exports = createTemplate
+
+//${component_header}
