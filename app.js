@@ -22,14 +22,18 @@ app.use(
 app.use(
     mount('/svg',serveStatic(path.join(__dirname, staticPath,'nodejs.html')))
 );
+app.use(
+    mount('/day',serveStatic(path.join(__dirname, staticPath,'daySentence.html')))
+);
 
 app.use(async (ctx, next) => {
     if (ctx.url === '/resume') {
-        
         // ctx.body = fs.readFileSync(path.join(__dirname, staticPath,'resume.pdf'));
         ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'resume.html'),'utf-8');
     } else if(ctx.url==='/svg'){
         ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'nodejs.html'),'utf-8')
+    }else if(ctx.url==='/day'){
+        ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'daySentence.html'),'utf-8')
     }
     else{
         await next();
@@ -55,8 +59,9 @@ app.use(
 
     mount('/', async (ctx) => {
         ctx.status = 200;
+        pageNum=+(ctx.query.page||0);
         const templateParams = {};
-        getPage(1,14).forEach((data, index) => {
+        getPage(pageNum).template.forEach((data, index) => {
             const num = index + 1;
             templateParams[`Title${num}`] = data.title;
             templateParams[`Date${num}`] = data.date;

@@ -15,21 +15,27 @@ function order() {
     return get_order;
 }
 
-function getRes(start,end){  
-    return Apidata.slice(start,end);
+function getRes(pageNum){  
+    if(Apidata.length/pageLen>=pageNum-1&&pageNum+1>0){
+        error=false 
+    }
+
+    if(error){
+        return{
+           template:[],
+           nextUrl:"/",
+        }
+    }else{
+        begin=pageNum*pageLen+1;
+        end=totalLen%pageLen===0?begin+pageLen:begin+totalLen+totalLen%pageLen;
+        return {
+            template:Apidata.slice(begin,end),
+            nextUrl:'/?page='+pageNum+1,
+        }
+    }
+    
+    
 }
 
+
 module.exports=getRes
-// async function(pageNum){
-//     if(Apidata.length/pageLen>pageNum+1){
-//         error=true 
-//     }
-//     const data=await new Promise((resolve,reject)=>{
-//         if(error) reject('out of length')
-//         else{
-//             begin=(pageNum-1)*pageLen+1;
-//             end=totalLen%pageLen===0?begin+pageLen:begin+totalLen+totalLen%pageLen;
-//             return getRes(begin,end)
-//         }
-//     })
-// } 
