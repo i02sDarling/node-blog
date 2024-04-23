@@ -11,19 +11,26 @@ app.use(
 );
 
 app.use(
-    mount('/', async (ctx) => {
-        const filePath = path.join(__dirname, '/source/ctTitle.svg');
+    mount('/resume',static(path.join(__dirname, 'msg')))
+);
 
-        // 使用异步读取文件
-        fs.readFile(filePath, 'utf-8', (err, data) => {
-            if (err) {
-                ctx.status = 500;
-                ctx.body = 'Error reading file.';
-            } else {
-                ctx.type = 'image/svg+xml'; // 设置响应类型为 SVG
-                ctx.body = data;
-            }
-        });
+app.use(async (ctx, next) => {
+    if (ctx.url === '/resume') {
+        ctx.type = 'application/pdf';
+        ctx.body = fs.readFileSync(path.join(__dirname, 'msg/resume.pdf'));
+    } else {
+        await next();
+    }
+});
+
+app.use(
+    mount('/', async (ctx) => {
+        ctx.status = 200;
+        const filePath = path.join(__dirname, 'msg/template.html');
+        ctx.body = fs.readFileSync(filePath, 'utf-8');
+        
     })
 );
+
+
 app.listen(3000);
