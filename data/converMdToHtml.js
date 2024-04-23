@@ -7,7 +7,7 @@ function convert() {
     originData.map(item => {
         content.push({
             id: item.id,
-            title: item.title,
+            title: item.title.replace('.md',""),
             date: item.date,
             content: marked.parse(item.content)
         });

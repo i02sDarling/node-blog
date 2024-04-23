@@ -59,9 +59,11 @@ app.use(
 
     mount('/', async (ctx) => {
         ctx.status = 200;
-        pageNum=+(ctx.query.page||0);
+        pageNum=ctx.query.page?ctx.query.page:0;
+        console.log(pageNum);
         const templateParams = {};
-        getPage(pageNum).template.forEach((data, index) => {
+        pageInfo=getPage(pageNum);
+        pageInfo.template.forEach((data, index) => {
             const num = index + 1;
             templateParams[`Title${num}`] = data.title;
             templateParams[`Date${num}`] = data.date;
@@ -69,6 +71,7 @@ app.use(
             templateParams[`URL${num}`] = '/article?articleId='+data.id;
         }); 
         templateParams[`component_header`]=header;
+        templateParams[`nextPageURL`]=pageInfo.nextUrl;
         ctx.body =indexTemplate(templateParams)
         
     })
