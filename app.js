@@ -6,7 +6,9 @@ const serveStatic = require('koa-static');
 const staticPath='./template/static'
 const app = new koa();
 const getPage=require('./data/getPage.js')
+const getArticle=require('./data/getArticleMsg.js')
 const template=require('./template/template.js')(path.join('./template/template.html'))
+const articleTemplate=require('./template/template.js')(path.join('./template/article.html'))
 
 app.use(
     serveStatic(path.join(__dirname, staticPath))
@@ -30,25 +32,38 @@ app.use(async (ctx, next) => {
         await next();
     }
 });
-reqCache=[]
+
 app.use(
+    mount('/article',async(ctx)=>{
+        req=+(ctx.query.articleId||0)
+        if(req===0){
+            ctx.body="hello";
+        }
+        else{
+            article=getArticle(1);
+            console.log(getArticle(1))
+            ctx.body=articleTemplate({article});
+        }
 
-    mount('/', async (ctx) => {
-        ctx.status = 200;
-        const templateParams = {};
-        getPage(1,13).forEach((data, index) => {
-            const num = index + 1;
-            templateParams[`Title${num}`] = data.title;
-            templateParams[`Date${num}`] = data.date;
-            templateParams[`Tag${num}`] = 'note';
-            templateParams[`URL${num}`] = null;
-        });
-
-        
-        ctx.body =template(templateParams)
-        
     })
-);
+)
+
+// app.use(
+
+    // mount('/', async (ctx) => {
+    //     ctx.status = 200;
+    //     const templateParams = {};
+    //     getPage(1,14).forEach((data, index) => {
+    //         const num = index + 1;
+    //         templateParams[`Title${num}`] = data.title;
+    //         templateParams[`Date${num}`] = data.date;
+    //         templateParams[`Tag${num}`] = 'note';
+    //         templateParams[`URL${num}`] = null;
+    //     }); 
+    //     ctx.body =template(templateParams)
+        
+    // })
+// );
 
 //fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
 app.listen(3000);
