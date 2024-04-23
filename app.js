@@ -4,9 +4,10 @@ const koa = require('koa');
 const mount = require('koa-mount');
 const serveStatic = require('koa-static');
 const staticPath='./template/static'
-const template = require('./template/template.js')(path.join(__dirname + '/template/template.html'))
 const app = new koa();
-console.log(path.join(__dirname, staticPath))
+const getPage=require('./data/getPage.js')
+const template=require('./template/template.js')(path.join('./template/template.html'))
+
 app.use(
     serveStatic(path.join(__dirname, staticPath))
 );
@@ -14,35 +15,37 @@ app.use(
 app.use(
     mount('/resume',serveStatic(path.join(__dirname, staticPath,'resume.pdf')))
 );
+app.use(
+    mount('/svg',serveStatic(path.join(__dirname, staticPath,'nodejs.html')))
+);
 
 app.use(async (ctx, next) => {
     if (ctx.url === '/resume') {
         ctx.type = 'application/pdf';
         ctx.body = fs.readFileSync(path.join(__dirname, staticPath,'resume.pdf'));
-    } else {
+    } else if(ctx.url==='/svg'){
+        ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'nodejs.html'),'utf-8')
+    }
+    else{
         await next();
     }
 });
-
+reqCache=[]
 app.use(
 
     mount('/', async (ctx) => {
         ctx.status = 200;
-        const filePath = path.join(__dirname, 'template','template.html');
-        ctx.body = template({
-            Title1:"hh",
-            Data1:'2023-1-2',
-            TagF:'Note',
-            URL1:'https://nodeblog-d2hk--3000--7dbe22a9.local-corp.webcontainer.io/article?page=1&id=1',
-            
-            Title2:'hh2',
-            Data2:'2023-1-2',
-            Tag2:'Note',
-            URL1:'https://nodeblog-d2hk--3000--7dbe22a9.local-corp.webcontainer.io/article?page=1&id=2',
+        const templateParams = {};
+        getPage(1,13).forEach((data, index) => {
+            const num = index + 1;
+            templateParams[`Title${num}`] = data.title;
+            templateParams[`Date${num}`] = data.date;
+            templateParams[`Tag${num}`] = 'note';
+            templateParams[`URL${num}`] = null;
+        });
 
-            
-
-        })
+        
+        ctx.body =template(templateParams)
         
     })
 );
