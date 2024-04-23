@@ -27,7 +27,7 @@ function getMsg(id){
         
         
     }
-    let lastURL='/article?articleId='+(id-1);
+    let lastURL=(id-1)===0?'/':'/article?articleId='+(id-1);
     let nextURL=(id+1)>Max ? '/': 'article?articleId='+(id+1);
     let pay='/pay';
     let next=(id+1)>Max?'未完待续': Titles[id+1];
@@ -40,6 +40,7 @@ function getMsg(id){
         date,
         title:"hh",
         description,
+        content,
         pay
 
     }

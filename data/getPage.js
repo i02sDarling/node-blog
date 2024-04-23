@@ -1,5 +1,5 @@
 
-const Apidata=require('./mockdata')
+const Apidata=require('./mockdata1')
 const res=[]
 const pageLen=13;
 const totalLen=38
