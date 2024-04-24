@@ -1,8 +1,8 @@
 
 const Apidata=require('./mockdata')
 const pageLen=13;
-const totalLen=Apidata.length;
 
+const totalLen=Apidata.length;
 
 
 function getRes(pageNum){ 

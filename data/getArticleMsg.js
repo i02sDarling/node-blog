@@ -6,9 +6,10 @@ const Max=mocData.length;
 // /article?articleid=1
 const Titles=[]
 function getMsg(id){
+    
     let description='';
     let title='';
-    let content='';
+    let content='Ops!作者还未完成';
     let date='';
     
     
