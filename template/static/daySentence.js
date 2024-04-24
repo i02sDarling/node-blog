@@ -121,6 +121,7 @@ const selectSVG = (id) => {
     "资源集市GitHub",
     "Koa",
     "精简",
+    "所有Js能实现的，最后一定可以用Js实现",
     
 
 

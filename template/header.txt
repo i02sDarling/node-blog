@@ -15,17 +15,10 @@
             <div class="collapse navbar-collapse" id=navbarCollapse>
                 <ul class="navbar-nav mr-auto">
                     <li class=nav-item><a class=nav-link href=/ />首页</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href=${note} id=dashboard-dropdown role=button
-                            data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-                            笔记甄选 </a>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" href=${day_sentence} id=dashboard-dropdown role=button
-                            data-toggle=dropdown aria-haspopup=true aria-expanded=false>
-                            每日一句 </a>
-                    </li>
-                    <li class=nav-item><a class=nav-link href=${core} />精选</a></li>
-                    <li class=nav-item><a class=nav-link href=${hot} />热门</a></li>
+                    <li class=nav-item><a class=nav-link href=/note />笔记甄选</a></li>
+                    <li class=nav-item><a class=nav-link href=/day />每日一句</a></li>
+                    <li class=nav-item><a class=nav-link href=/core />精选</a></li>
+                    <li class=nav-item><a class=nav-link href=/hot />热门</a></li>
                     <li class=nav-item><a class=nav-link href=/resume />简历</a></li>
                     <li class=nav-item><a class=nav-link href=/svg />思维导图</a></li>
                 </ul>

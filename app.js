@@ -7,8 +7,8 @@ const staticPath='./template/static'
 const app = new koa();
 const getPage=require('./data/getPage.js')
 const getArticle=require('./data/getArticleMsg.js')
-const indexTemplate=require('./template/template.js')(path.join('./template/template.html'))
-const articleTemplate=require('./template/template.js')(path.join('./template/article.html'))
+const Template=require('./template/template.js')
+const articleTemplate=require('./template/template.js')(path.join(staticPath,'article.html'))
 
 const header=fs.readFileSync('./template/header.txt','utf-8');
 
@@ -32,14 +32,15 @@ app.use(async (ctx, next) => {
         ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'resume.html'),'utf-8');
     } else if(ctx.url==='/svg'){
         ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'nodejs.html'),'utf-8')
-    }else if(ctx.url==='/day'){
+    }
+    else if(ctx.url==='/day'){
         ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'daySentence.html'),'utf-8')
     }
     else{
         await next();
     }
 });
-
+ 
 app.use(
     mount('/article',async(ctx,next)=>{
         req=+(ctx.query.articleId||0)
@@ -49,7 +50,7 @@ app.use(
         else{
             article=getArticle(req);
             component_header=header;
-            ctx.body=articleTemplate({article,component_header});
+            ctx.body=Template(path.join(staticPath,'article.html'))({article,component_header});
         }
 
     })
@@ -60,10 +61,10 @@ app.use(
     mount('/', async (ctx) => {
         ctx.status = 200;
         pageNum=ctx.query.page?ctx.query.page:0;
-        console.log(pageNum);
         const templateParams = {};
         pageInfo=getPage(pageNum);
-        pageInfo.template.forEach((data, index) => {
+        pageInfo.pages.map((data, index) => {
+            
             const num = index + 1;
             templateParams[`Title${num}`] = data.title;
             templateParams[`Date${num}`] = data.date;
@@ -72,7 +73,7 @@ app.use(
         }); 
         templateParams[`component_header`]=header;
         templateParams[`nextPageURL`]=pageInfo.nextUrl;
-        ctx.body =indexTemplate(templateParams)
+        ctx.body =Template(path.join(staticPath,'template.html'))(templateParams);
         
     })
 );
