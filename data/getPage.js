@@ -6,10 +6,11 @@ const totalLen=Apidata.length;
 
 
 function getRes(pageNum){ 
+    console.log(totalLen);
     let error=false;
     pageNum=parseInt(pageNum);
     
-    if(pageNum<0&&pageNum*pageLen>Apidata.length){
+    if(pageNum<0||pageNum*pageLen>Apidata.length){
         error=true; 
     }
     
@@ -21,9 +22,11 @@ function getRes(pageNum){
         }
     }else{
         begin=pageNum*pageLen;
-        end=totalLen%pageLen===0?begin+pageLen:begin+totalLen%pageLen+1;
+        // end=totalLen%pageLen===0?begin+pageLen:begin+totalLen%pageLen+1;
+        end=begin+((totalLen-begin)>pageLen?pageLen:(totalLen-begin));
         nextUrl='/?page='+(pageNum+1);
         let res=Apidata.slice(begin,end);
+        console.log(begin,end);
         if(pageLen-res.length!==0){
             nextUrl='/';
             fillLen=pageLen-res.length;

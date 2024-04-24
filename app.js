@@ -9,6 +9,8 @@ const getPage=require('./data/getPage.js')
 const getArticle=require('./data/getArticleMsg.js')
 const Template=require('./template/template.js')
 const articleTemplate=require('./template/template.js')(path.join(staticPath,'article.html'))
+// const convert=require('./data/converMdToHtml.js')
+
 
 const header=fs.readFileSync('./template/header.txt','utf-8');
 
@@ -25,6 +27,9 @@ app.use(
 app.use(
     mount('/day',serveStatic(path.join(__dirname, staticPath,'daySentence.html')))
 );
+// app.use(
+//     mount('/day',serveStatic(path.join(__dirname, staticPath,'article2')))
+// );
 
 app.use(async (ctx, next) => {
     if (ctx.url === '/resume') {
@@ -61,6 +66,7 @@ app.use(
     mount('/', async (ctx) => {
         ctx.status = 200;
         pageNum=ctx.query.page?ctx.query.page:0;
+        
         const templateParams = {};
         pageInfo=getPage(pageNum);
         pageInfo.pages.map((data, index) => {
