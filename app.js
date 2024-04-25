@@ -13,7 +13,10 @@ const HomePage=require('./template/Home.js');
 
 // const convert=require('./data/converMdToHtml.js')
 
+const getData=require('./request/get-data.js');
 
+const msg=await getData("hh","hh");
+console.log(msg);
 
 const header=fs.readFileSync(path.join(staticPath,'/header.txt'),'utf-8');
 
@@ -95,6 +98,7 @@ app.use(
         }
     })
 );
+
 // 404 page
 // app.use(async (ctx) => {
 //     ctx.status = 200;
