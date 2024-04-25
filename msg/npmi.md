@@ -1,3 +1,4 @@
+day 3
 下面是一个Markdown表格，总结了不同npm install选项的含义和作用：
 
 | 命令                            | 描述                                                                                     |
@@ -9,3 +10,7 @@
 ### 说明：  
 - **dependencies**：这些包是应用程序在生产环境中所需的，它们包括运行应用程序所必须的模块和库。
 - **devDependencies**：这些包只在开发和测试过程中需要，例如测试框架、构建工具等，不会随着应用程序一起部署到生产环境中。
+
+<!-- <li class=nav-item><a class=nav-link href=/note />笔记甄选</a></li>
+<li class=nav-item><a class=nav-link href=/core />精选</a></li>
+<li class=nav-item><a class=nav-link href=/hot />热门</a></li> -->
