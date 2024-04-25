@@ -21,7 +21,7 @@ module.exports = class RPC {
                     data;
 
                 let checkLength = null;
-                while (buffer && (checkLength = this.isCompleteRequest(buffer))) {
+                while (buffer && (checkLength === this.isCompleteRequest(buffer))) {
                     let requestBuffer = null;
                     if (checkLength === buffer.length) {
                         requestBuffer = buffer;

@@ -1,6 +1,6 @@
 const listClient = require('./list-client.js');
 
-module.exports = async function (sortType = 0, filtType = 0) {
+module.exports = async function () {
 
     // 使用微服务拉取数据
     const data = await new Promise((resolve, reject) => {
