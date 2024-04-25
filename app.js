@@ -12,10 +12,8 @@ const articleTemplate=require('./template/template.js')(path.join(staticPath,'ar
 const HomePage=require('./template/Home.js');
 const getData=require('./request/get-data.js')
 // const convert=require('./data/converMdToHtml.js')
-console.log(getData());
 
-
-
+// await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
 
 
 

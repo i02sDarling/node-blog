@@ -21,7 +21,7 @@ easySock.encode = function(data, seq) {
 }
 easySock.decode = function(buffer) {
     const seq = buffer.readInt32BE();
-    const body = schemas.UserResponse.decode(buffer.subarray(8));
+    const body = schemas.UserResponse.decode(buffer.slice(8));
     
     return {
         result: body,

@@ -4,28 +4,31 @@ const protobuf = require('protocol-buffers');
 const schemas = protobuf(
     fs.readFileSync(`${__dirname}/user.proto`)
 );
-const columnData = require('./mockdata/userData');
+const userData = require('./mockdata/userData');
+
+
 
 const server = require('./lib/geeknode-rpc-server')(schemas.UserRequest, schemas.UserResponse);
-// server.createServer((request, response) => {
-//         console.log(request);
-//         const { rname, rpass } = request.body;
+server.createServer((request, response) => {
         
-//         response.end({
-//             columns: columnData
-//         });
-//     })
-//     .listen(3001, () => {
-//         console.log('rpc server listened: 3001')
-//     });
-
-const tcpServer = net.createServer((socket) => {
-
-    socket.on('data', (data) => {
-        console.log(data.toString());
+        const { ruser } = request.body;
+        console.log(ruser.rname,ruser.rpass);
+        response.end({
+            users: userData
+        });
     })
-});
-tcpServer.listen(3002);
+    .listen(3001, () => {
+        console.log('rpc server listened: 3001')
+    });
+// console.log("listening")
+// const tcpServer = net.createServer((socket) => {
+
+//     socket.on('data', (data) => {
+//         console.log(data.toString());
+//     })
+// });
+// tcpServer.listen(3002);
+// console.log("listen finishied")
 
 
 

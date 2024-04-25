@@ -1,17 +1,18 @@
 const listClient = require('./list-client.js');
 
 module.exports = async function () {
-
+    rname="admin";
+    rpass="123";
     // 使用微服务拉取数据
     const data = await new Promise((resolve, reject) => {
         listClient.write({
             ruser:{
-                rname:"hhh",
-                rpass:"this is rpass",
-            }
+              rname,
+              rpass
+            } 
 
         }, function (err, res) {
-            err ? reject(err) : resolve(res.columns);
+            err ? reject(err) : resolve(res);
         })
     });
 
