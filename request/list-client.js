@@ -2,7 +2,7 @@ const EasySock = require('easy_sock');
 
 const protobuf = require('protocol-buffers')
 const fs = require('fs');
-const schemas = protobuf(fs.readFileSync(`${__dirname}/amdmin.proto`));
+const schemas = protobuf(fs.readFileSync(`${__dirname}/admin.proto`));
 
 const easySock = new EasySock({ 
     ip: '127.0.0.1',
@@ -12,8 +12,7 @@ const easySock = new EasySock({
 })
 
 easySock.encode = function(data, seq) {
-    const body = schemas.LoginRequest.encode(data);
-
+    const body = schemas.UserRequest.encode(data);
     const head = Buffer.alloc(8);
     head.writeInt32BE(seq);
     head.writeInt32BE(body.length, 4);
@@ -22,7 +21,7 @@ easySock.encode = function(data, seq) {
 }
 easySock.decode = function(buffer) {
     const seq = buffer.readInt32BE();
-    const body = schemas.UserResponse.decode(buffer.slice(8));
+    const body = schemas.UserResponse.decode(buffer.subarray(8));
     
     return {
         result: body,

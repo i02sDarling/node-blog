@@ -8,9 +8,10 @@ module.exports = class RPC {
         this.decodeRequest = decodeRequest;
         this.isCompleteRequest = isCompleteRequest;
     }
-//UserResponse  LoginRequest
+
     createServer(callback) {
         let buffer = null;
+        
 
         const tcpServer = net.createServer((socket) => {
 
@@ -22,7 +23,7 @@ module.exports = class RPC {
                 let checkLength = null;
                 while (buffer && (checkLength = this.isCompleteRequest(buffer))) {
                     let requestBuffer = null;
-                    if (checkLength == buffer.length) {
+                    if (checkLength === buffer.length) {
                         requestBuffer = buffer;
                         buffer = null;
 
@@ -30,8 +31,8 @@ module.exports = class RPC {
                         requestBuffer = buffer.subarray(0, checkLength);
                         buffer = buffer.subarray(checkLength);
                     }
-                    const request="hh";
-                    // const request = this.decodeRequest(requestBuffer);
+
+                    const request = this.decodeRequest(requestBuffer);
                     callback(
                         { // request
                             body: request.result,

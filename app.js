@@ -10,13 +10,14 @@ const getArticle=require('./data/getArticleMsg.js')
 const Template=require('./template/template.js')
 const articleTemplate=require('./template/template.js')(path.join(staticPath,'article.html'))
 const HomePage=require('./template/Home.js');
-
+const getData=require('./request/get-data.js')
 // const convert=require('./data/converMdToHtml.js')
+console.log(getData());
 
-const getData=require('./request/get-data.js');
 
-const msg=await getData("hh","hh");
-console.log(msg);
+
+
+
 
 const header=fs.readFileSync(path.join(staticPath,'/header.txt'),'utf-8');
 

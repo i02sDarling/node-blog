@@ -1,0 +1,20 @@
+module.exports=[{
+    id:1,
+    username:"admin",
+    password:"123",
+    is_admin:false,
+    articles:[
+        {
+            aid:1,
+            title:'日记',
+            content:'花了好长时间写这个RPC',
+            date:'2024-4-25',
+        },
+        {
+            aid:2,
+            title:'日记',
+            content:'花了好长时间写这个RPC',
+            date:'2024-4-25',
+        }
+    ]
+}]
