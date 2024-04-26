@@ -1,28 +1,27 @@
 const fs = require('fs')
-const getUsr=require('./vetifyAdmin');
+const getUsr=require('./apis/vetifyAdmin');
 const protobuf = require('protocol-buffers');
 const schemas = protobuf(
-    fs.readFileSync(`${__dirname}/user.proto`)
+    fs.readFileSync(`${__dirname}/reg.proto`)
 );
-const userData = require('./mockdata/userData');
-const reg=require('./register')
-reg('hhh','pasd');
 
 
 
-// const server = require('./lib/geeknode-rpc-server')(schemas.UserRequest, schemas.UserResponse);
-// server.createServer((request, response) => {
+
+
+const server = require('./lib/bussiness-rpc-server')(schemas.UserRequest, schemas.UserResponse);
+server.createServer((request, response) => {
         
-//         const { ruser } = request.body;
-//         const {rname,rpass}=ruser;
+        const { ruser } = request.body;
+        const {rname,rpass}=ruser;
         
-//         response.end({
-//             users: getUsr(rname,rpass)
-//         });
-//     })
-//     .listen(3001, () => {
-//         console.log('rpc server listened: 3001')
-//     });
+        response.end({
+            users: getUsr(rname,rpass)
+        });
+    })
+    .listen(3002, () => {
+        console.log('rpc server listened: 3001')
+    });
 
 
 
