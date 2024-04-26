@@ -11,11 +11,12 @@ const Template = require('./template/template.js')
 const articleTemplate = require('./template/template.js')(path.join(staticPath, 'article.html'))
 const HomePage = require('./template/Home.js');
 const getData = require('./request/get-data.js')
+const bodyParser=require('koa-bodyparser');
 // const convert=require('./data/converMdToHtml.js')
 
 // await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
 
-
+app.use(bodyParser());
 
 const header = fs.readFileSync(path.join(staticPath, '/header.txt'), 'utf-8');
 
@@ -71,16 +72,25 @@ app.use(
 
     })
 )
+
 app.use(
-    mount('/data', async (ctx) => {
-        let rname = ctx.query.username, rpass = ctx.query.password;
-        let res = await getData((rname || 0), (rpass || 0));
-        ctx.body = res.users;
+    mount('/admin', async (ctx, next) => {
+        if(ctx.method==='POST'){
+            if(ctx.request.body){
+            const {username,password}=ctx.request.body;
+            let res=await getData(username, password);
+            ctx.body=res;
+        }
+            
+        }else{
+            ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'admin.html'),'utf-8');
+        }
+        
+    })
+)
 
-    }
-    )
 
-);
+
 app.use(
 
     mount('/', async (ctx) => {
@@ -106,6 +116,7 @@ app.use(
         }
     })
 );
+
 
 // 404 page
 // app.use(async (ctx) => {

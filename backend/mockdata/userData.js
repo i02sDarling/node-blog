@@ -17,7 +17,7 @@ module.exports = [
     {
         id: 1,
         username: "admin",
-        password: "a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3",
+        password: "57f030afc700dd37c5f4df4083557582faecba33c6c32ad2d98ce47d5c9b603a",
         is_admin: true,
         articles: [
             {
