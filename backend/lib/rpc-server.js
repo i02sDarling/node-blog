@@ -11,7 +11,7 @@ module.exports = class RPC {
 
     createServer(callback) {
         let buffer = null;
-        
+
 
         const tcpServer = net.createServer((socket) => {
 
@@ -28,8 +28,8 @@ module.exports = class RPC {
                         buffer = null;
 
                     } else {
-                        requestBuffer = buffer.subarray(0, checkLength);
-                        buffer = buffer.subarray(checkLength);
+                        requestBuffer = buffer.slice(0, checkLength);
+                        buffer = buffer.slice(checkLength);
                     }
 
                     const request = this.decodeRequest(requestBuffer);

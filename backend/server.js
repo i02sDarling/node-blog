@@ -1,5 +1,5 @@
 const fs = require('fs')
-const net=require('net')
+const getUsr=require('./vetifyAdmin');
 const protobuf = require('protocol-buffers');
 const schemas = protobuf(
     fs.readFileSync(`${__dirname}/user.proto`)
@@ -12,9 +12,10 @@ const server = require('./lib/geeknode-rpc-server')(schemas.UserRequest, schemas
 server.createServer((request, response) => {
         
         const { ruser } = request.body;
-        console.log(ruser.rname,ruser.rpass);
+        const {rname,rpass}=ruser;
+        
         response.end({
-            users: userData
+            users: getUsr(rname,rpass)
         });
     })
     .listen(3001, () => {

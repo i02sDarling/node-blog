@@ -1,0 +1,14 @@
+message rUser{
+    required string rname = 1;
+    required string rpass = 2;
+    required bool is_admin=3;
+}
+
+
+
+message RegResponse {
+    required User users = 1;
+}
+message RegRequest {
+    required rUser ruser = 1;
+}

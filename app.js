@@ -15,9 +15,7 @@ const getData = require('./request/get-data.js')
 
 // await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
 
-app.use(mount('/data', async (ctx) => {
-    ctx.body = await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
-}));
+
 
 const header = fs.readFileSync(path.join(staticPath, '/header.txt'), 'utf-8');
 
@@ -73,7 +71,16 @@ app.use(
 
     })
 )
+app.use(
+    mount('/data', async (ctx) => {
+        let rname = ctx.query.username, rpass = ctx.query.password;
+        let res = await getData((rname || 0), (rpass || 0));
+        ctx.body = res.users;
 
+    }
+    )
+
+);
 app.use(
 
     mount('/', async (ctx) => {
