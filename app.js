@@ -14,10 +14,11 @@ const getData=require('./request/get-data.js')
 // const convert=require('./data/converMdToHtml.js')
 
 // await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
+app.use(mount('/data', async (ctx) => {
+    ctx.body = await getData();
+}));
 
 
-
-const header=fs.readFileSync(path.join(staticPath,'/header.txt'),'utf-8');
 
 app.use(
     serveStatic(path.join(__dirname, staticPath))
@@ -72,6 +73,7 @@ app.use(
     })
 )
 
+
 app.use(
 
     mount('/', async (ctx) => {
@@ -91,7 +93,7 @@ app.use(
                 templateParams[`Tag${num}`] = 'note';
                 templateParams[`URL${num}`] = '/article?articleId='+data.id;
             }); 
-            templateParams[`component_header`]=header;
+ 
             templateParams[`nextPageURL`]=pageInfo.nextUrl;
             ctx.body =Template(path.join(staticPath,'template.html'))(templateParams);
         }

@@ -6,7 +6,7 @@ const Template=require('./template.js')
 
 
 
-const header=fs.readFileSync(path.join(__dirname,'static/header.txt'),'utf-8');
+
 let is_init=false;
 let HomePage=null;
 function getHome(){
@@ -28,7 +28,6 @@ function HomeInit(){
         templateParams[`Tag${num}`] = 'note';
         templateParams[`URL${num}`] = '/article?articleId='+data.id;
     }); 
-    templateParams[`component_header`]=header;
     templateParams[`nextPageURL`]=pageInfo.nextUrl;
     HomePage=Template(path.join(__dirname,'static/template.html'))(templateParams);    
 }

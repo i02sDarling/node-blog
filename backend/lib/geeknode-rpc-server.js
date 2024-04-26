@@ -14,7 +14,7 @@ module.exports = function (protobufRequestSchema, protobufResponseSchema) {
             return {
                 seq: seq,
                 // result: protobufRequestSchema.decode(buffer.subarray(8))
-                result: protobufRequestSchema.decode(buffer)
+                result: protobufRequestSchema.decode(buffer.slice(8)),
             }
             //buffer.slice(8)
         },
@@ -25,9 +25,8 @@ module.exports = function (protobufRequestSchema, protobufResponseSchema) {
         },
         // 编码返回包
         encodeResponse(data, seq) {
-            console.log(data);
             const body = protobufResponseSchema.encode(data);
-            console.log(protobufResponseSchema.encode(data));
+            
             const head = Buffer.alloc(8);
             head.writeUInt32BE(seq);
             head.writeUInt32BE(body.length, 4);

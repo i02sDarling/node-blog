@@ -17,8 +17,8 @@ server.createServer((request, response) => {
             users: userData
         });
     })
-    .listen(3001, () => {
-        console.log('rpc server listened: 3001')
+    .listen(4003, () => {
+        console.log('rpc server listened: 4003')
     });
 // console.log("listening")
 // const tcpServer = net.createServer((socket) => {
@@ -27,7 +27,7 @@ server.createServer((request, response) => {
 //         console.log(data.toString());
 //     })
 // });
-// tcpServer.listen(3002);
+// tcpServer.listen(3001);
 // console.log("listen finishied")
 
 

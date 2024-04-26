@@ -16,20 +16,23 @@ module.exports = class RPC {
         const tcpServer = net.createServer((socket) => {
 
             socket.on('data', (data) => {
+                console.log(data.toString());
                 buffer = (buffer && buffer.length > 0) ?
                     Buffer.concat([buffer, data]) : // 有遗留数据才做拼接操作
                     data;
+                console.log(buffer.toString())
 
                 let checkLength = null;
                 while (buffer && (checkLength = this.isCompleteRequest(buffer))) {
+                    console.log(checkLength);
                     let requestBuffer = null;
                     if (checkLength == buffer.length) {
                         requestBuffer = buffer;
                         buffer = null;
 
                     } else {
-                        requestBuffer = buffer.subarray(0, checkLength);
-                        buffer = buffer.subarray(checkLength);
+                        requestBuffer = buffer.slice(0, checkLength);
+                        buffer = buffer.slice(checkLength);
                     }
 
                     const request = this.decodeRequest(requestBuffer);
