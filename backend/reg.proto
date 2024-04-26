@@ -4,8 +4,6 @@ message rUser{
     required bool is_admin=3;
 }
 
-
-
 message RegResponse {
     required User users = 1;
 }
