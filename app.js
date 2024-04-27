@@ -85,7 +85,8 @@ app.use(
             }
 
         } else if (ctx.url == '/vertifyed') {
-            console.log(ctx.url);
+            let root_app = 'hh';
+            ctx.body = Template(path.join(staticPath, 'dashboard.html'))({ root_app });
         } else {
             ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'admin.html'), 'utf-8');
         }
