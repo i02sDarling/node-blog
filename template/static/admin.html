@@ -243,12 +243,18 @@
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ username: username, password: password })
-      }).then(data => {
-        // const {}=data
-        console.log(data);
-      }).catch(error => {
-        console.error(error)
-      })
+      }).then(res => res.json())
+        .then(data => {
+          // const {}=data
+          const user = data;
+          if (user.id && user.id != 0) {
+            console.log("vertifyed successed");
+            localStorage.setItem('user', user);
+            window.location.href = '/admin/vertifyed';
+          }
+        }).catch(error => {
+          console.error(error)
+        })
     } else {
       console("username or password required");
     }

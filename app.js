@@ -5,8 +5,8 @@ const mount = require('koa-mount');
 const serveStatic = require('koa-static');
 const staticPath = './template/static'
 const app = new koa();
-const getPage = require('./data/getPage.js')
-const getArticle = require('./data/getArticleMsg.js')
+const getPage = require('./front-data/getPage.js')
+const getArticle = require('./front-data/getArticleMsg.js')
 const Template = require('./template/template.js')
 const articleTemplate = require('./template/template.js')(path.join(staticPath, 'article.html'))
 const HomePage = require('./template/Home.js');
@@ -76,7 +76,6 @@ app.use(
 
 app.use(
     mount('/admin', async (ctx, next) => {
-        console.log(ctx.url);
         if (ctx.method === 'POST') {
             if (ctx.request.body) {
                 const { username, password } = ctx.request.body;
