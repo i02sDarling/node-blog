@@ -808,9 +808,27 @@
 </script>
 <script>
     const sessionId = localStorage.getItem('user');
-    if (user.id != 0) {
-
-    }
+    // if (user.id != 0) {
+    //     fetch(`/admin/vertyf`, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({ username: username, password: password })
+    //     }).then(res => res.json())
+    //         .then(data => {
+    //             const user = data;
+    //             if (user.id && user.id != 0) {
+    //                 console.log("vertifyed successed");
+    //                 localStorage.setItem('user', user);
+    //                 window.location.href = '/admin/vertifyed';
+    //             }
+    //         }).catch(error => {
+    //             console.error(error)
+    //         })
+    // } else {
+    //     window.location.href = "/admin";
+    // }
 </script>
 
 </html>
