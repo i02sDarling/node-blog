@@ -11,7 +11,8 @@ const Template = require('./template/template.js')
 const articleTemplate = require('./template/template.js')(path.join(staticPath, 'article.html'))
 const HomePage = require('./template/Home.js');
 const getData = require('./request/get-data.js')
-const bodyParser=require('koa-bodyparser');
+const bodyParser = require('koa-bodyparser');
+const { verify } = require('crypto');
 // const convert=require('./data/converMdToHtml.js')
 
 // await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
@@ -75,17 +76,20 @@ app.use(
 
 app.use(
     mount('/admin', async (ctx, next) => {
-        if(ctx.method==='POST'){
-            if(ctx.request.body){
-            const {username,password}=ctx.request.body;
-            let res=await getData(username, password);
-            ctx.body=res;
+        console.log(ctx.url);
+        if (ctx.method === 'POST') {
+            if (ctx.request.body) {
+                const { username, password } = ctx.request.body;
+                let res = await getData(username, password);
+                ctx.body = res;
+            }
+
+        } else if (ctx.url == '/vertifyed') {
+            console.log(ctx.url);
+        } else {
+            ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'admin.html'), 'utf-8');
         }
-            
-        }else{
-            ctx.body=fs.readFileSync(path.join(__dirname,staticPath,'admin.html'),'utf-8');
-        }
-        
+
     })
 )
 
@@ -125,4 +129,6 @@ app.use(
 // });
 
 //fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
+
 app.listen(3000);
+console.log("App is rungning at prot 3000,you can use `node server` to start necessry service later")
