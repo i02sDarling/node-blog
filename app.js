@@ -93,18 +93,28 @@ app.use(
 
 app.use(
     mount('/vertifyed', async (ctx, next) => {
-        // if (ctx.method === 'POST') {
-        //     // console.log('post method')
-        //     // const { sessionId } = ctx.request.body;
-        //     // console.log(sessionId);
-        //     // ctx.body = sessionId;
-        // } else {
-        console.log('get method', path.join(staticPath, 'dashboard.html'))
-        let root_app = 'hh';
+        if (ctx.method === 'POST') {
+            if(ctx.request.body){
+                const { sessionId } = ctx.request.body;
+                let msg=sessionId;
+                ctx.body = {msg}; 
+            }
+            
+        } else {
+            let root_app='hh';
+            let tems={};
+            // tems.rootApp='hh';
+            // tems[`rootApp`]='hh';
+            // console.log(tems);
+            // ctx.body = Template(path.join(staticPath,'dashboard.html'))(tems);
+            ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'dashboard.html'), 'utf-8');
+        }
+        // admin Post
 
-        ctx.body = Template(path.join(__dirname, staticPath, 'dashboard.html'))({ root_app });
-        // }
-        //admin Post
+        // {
+        //     Title1: '经验总结',
+        //     Date1: '2024-04-01',
+        //     Tag1: 'note',}
 
 
     })
@@ -133,7 +143,9 @@ app.use(
             });
             templateParams[`component_header`] = header;
             templateParams[`nextPageURL`] = pageInfo.nextUrl;
+            console.log(templateParams);
             ctx.body = Template(path.join(staticPath, 'template.html'))(templateParams);
+            
         }
     })
 );

@@ -601,8 +601,8 @@
                     </li>
                     <li class="breadcrumb-item active">My Dashboard</li>
                 </ol>
-                <div id="root-app">
-                    ${root_app}
+                <div id="root_app_admin">
+                    ${rootApp}
                 </div>
 
 
@@ -651,7 +651,23 @@
 <script>
     console.log('running');
     const sessionId = localStorage.getItem('sessionId');
-    console.log(sessionId);
+    setTimeout(() => {
+        fetch(``,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ sessionId:sessionId, })
+      })
+      .then(res => res.json())
+      .then(data=>{
+        const {msg}=data;
+        console.log(msg);
+      })
+      
+      
+    }, 500);
+    
 
 </script>
 
