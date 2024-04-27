@@ -74,21 +74,38 @@ app.use(
     })
 )
 
+
 app.use(
     mount('/admin', async (ctx, next) => {
+        //admin Post
+
         if (ctx.method === 'POST') {
             if (ctx.request.body) {
                 const { username, password } = ctx.request.body;
                 let res = await getData(username, password);
                 ctx.body = res;
             }
-
-        } else if (ctx.url == '/vertifyed') {
-            let root_app = 'hh';
-            ctx.body = Template(path.join(staticPath, 'dashboard.html'))({ root_app });
         } else {
             ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'admin.html'), 'utf-8');
         }
+    })
+)
+
+app.use(
+    mount('/vertifyed', async (ctx, next) => {
+        // if (ctx.method === 'POST') {
+        //     // console.log('post method')
+        //     // const { sessionId } = ctx.request.body;
+        //     // console.log(sessionId);
+        //     // ctx.body = sessionId;
+        // } else {
+        console.log('get method', path.join(staticPath, 'dashboard.html'))
+        let root_app = 'hh';
+
+        ctx.body = Template(path.join(__dirname, staticPath, 'dashboard.html'))({ root_app });
+        // }
+        //admin Post
+
 
     })
 )

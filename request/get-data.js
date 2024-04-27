@@ -39,7 +39,7 @@ function storeId(id, username, curts, sessionId) {
             sessionId: sessionId
         });
     }
-    console.log(sessionList);
+
     fs.writeFileSync(path.join(__dirname, './sessionId.js'), `module.exports=${JSON.stringify(sessionList)}`);
     return 'sucess';
 
@@ -58,7 +58,7 @@ function generateSesionId(id, username) {
 }
 function processUser(res) {
 
-    let user = res.users[0];
+    let user = res['users'][0];
     user = {
         id: user.id,
         username: user.username,
@@ -82,9 +82,7 @@ module.exports = async function (username, password) {
             }
 
         }, function (err, res) {
-
             res = processUser(res);
-            console.log(res);
             err ? reject(err) : resolve(res);
         })
     });

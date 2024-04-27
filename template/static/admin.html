@@ -237,7 +237,7 @@
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     if (username && password) {
-      fetch(`/admin`, {
+      fetch(``, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -247,9 +247,13 @@
         .then(data => {
           const user = data;
           if (user.id && user.id != 0) {
-            console.log("vertifyed successed");
-            localStorage.setItem('user', user);
-            window.location.href = '/admin/vertifyed';
+            localStorage.setItem('id', user.id);
+            localStorage.setItem('username', user.articles);
+            localStorage.setItem('sessionId', user.sessionId);
+            if (localStorage.getItem('sessionId') != null) {
+              window.location.href = '/vertifyed';
+            }
+
           }
         }).catch(error => {
           console.error(error)
@@ -260,3 +264,35 @@
   })
 
 </script>
+
+<!-- <script>
+        document.addEventListener("DOMContentLoaded", function (event) {
+            console.log('running');
+            const sessionId = localStorage.getItem('user');
+            console.log(sessionId);
+            if (user.id != 0) {
+                console.log(user);
+                fetch(`/`, {//注意 !! 地址问题
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ sessionId: user.sessionId })
+                }).then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        // const user = data;
+                        // if (user.id && user.id != 0) {
+                        //     console.log("vertifyed successed");
+                        //     localStorage.setItem('user', user);
+                        //     window.location.href = '/admin/vertifyed';
+                        // }
+                    }).catch(error => {
+                        console.error(error)
+                    })
+            } else {
+                // window.location.href = "/";
+            }
+        });
+
+    </script> -->
