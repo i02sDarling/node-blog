@@ -248,7 +248,7 @@
           const user = data;
           if (user.id && user.id != 0) {
             localStorage.setItem('id', user.id);
-            localStorage.setItem('articles', user.articles);
+            localStorage.setItem('articles', JSON.stringify(user.articles));
             localStorage.setItem('sessionId', user.sessionId);
             if (localStorage.getItem('sessionId') != null) {
               window.location.href = '/vertifyed';

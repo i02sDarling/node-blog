@@ -29,7 +29,7 @@ module.exports = class ArticleItem extends React.Component {
     }, /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\u6807\u9898"), /*#__PURE__*/React.createElement("th", null, "\u63CF\u8FF0"), /*#__PURE__*/React.createElement("th", null, "\u65E5\u671F"), /*#__PURE__*/React.createElement("th", null, "\u5185\u5BB9"))), /*#__PURE__*/React.createElement("tfoot", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", null, "\u6807\u9898"), /*#__PURE__*/React.createElement("th", null, "\u63CF\u8FF0"), /*#__PURE__*/React.createElement("th", null, "\u65E5\u671F"), /*#__PURE__*/React.createElement("th", null, "\u5185\u5BB9"))), /*#__PURE__*/React.createElement("tbody", null, Articles.map((article, index) => {
       return /*#__PURE__*/React.createElement("tr", {
         key: index
-      }, /*#__PURE__*/React.createElement("td", null, article.title), /*#__PURE__*/React.createElement("td", null, article.description), /*#__PURE__*/React.createElement("td", null, article.date), /*#__PURE__*/React.createElement("td", null, article.content));
+      }, /*#__PURE__*/React.createElement("td", null, article.title), /*#__PURE__*/React.createElement("td", null, "hhh"), /*#__PURE__*/React.createElement("td", null, article.date), /*#__PURE__*/React.createElement("td", null, article.content));
     }))))));
   }
 };
@@ -147,16 +147,15 @@ module.exports = class Charts extends React.Component {
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-module.exports = class ArticleItem extends React.Component {
+module.exports = class Settings extends React.Component {
   render() {
-    const Articles = this.props.articles;
     return /*#__PURE__*/React.createElement("div", {
       className: "card mb-3"
     }, /*#__PURE__*/React.createElement("div", {
       className: "card-header"
     }, /*#__PURE__*/React.createElement("i", {
       className: "fa fa-area-chart"
-    }), " Privaty"), /*#__PURE__*/React.createElement("div", {
+    }), " ", this.props.name), /*#__PURE__*/React.createElement("div", {
       className: "card-body"
     }, /*#__PURE__*/React.createElement("div", {
       className: "row"
@@ -30131,6 +30130,39 @@ if (
 
 /***/ }),
 
+/***/ "./node_modules/react-dom/client.js":
+/*!******************************************!*\
+  !*** ./node_modules/react-dom/client.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var m = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+if (false) {} else {
+  var i = m.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED;
+  exports.createRoot = function(c, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.createRoot(c, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+  exports.hydrateRoot = function(c, h, o) {
+    i.usingClientEntryPoint = true;
+    try {
+      return m.hydrateRoot(c, h, o);
+    } finally {
+      i.usingClientEntryPoint = false;
+    }
+  };
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/react-dom/index.js":
 /*!*****************************************!*\
   !*** ./node_modules/react-dom/index.js ***!
@@ -33651,55 +33683,76 @@ var __webpack_exports__ = {};
   !*** ./browser/index.jsx ***!
   \***************************/
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactDOM = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+const ReactDOM = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 const Articles = __webpack_require__(/*! ../component/Articles.jsx */ "./component/Articles.jsx");
 const Charts = __webpack_require__(/*! ../component/Charts.jsx */ "./component/Charts.jsx");
 const Settings = __webpack_require__(/*! ../component/SettingsP.jsx */ "./component/SettingsP.jsx");
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      type: this.props.Type,
-      msg: Reactmsg,
-      articles: ReactArticles,
-      sortType: reactInitSortType
-    };
-  }
+  state = {
+    type: this.props.Type,
+    msg: Reactmsg,
+    articles: ReactArticles,
+    name: 'Privacy'
+  };
   componentDidMount() {
-    document.getElementById('btn-dashboard').addEventListener('click', this.setState({
-      Type: "Charts"
-    }));
-    document.getElementById('btn-charts').addEventListener('click', this.setState({
-      Type: "Charts"
-    }));
-    document.getElementById('btn-articles').addEventListener('click', this.setState({
-      Type: 'Articles'
-    }));
-    document.getElementById('btn-privacy').addEventListener('click', this.setState({
-      Type: 'Settings'
-    }));
+    const noDefaultLinks = document.querySelectorAll('.no-default-action');
+
+    // 为每个链接添加点击事件监听器
+    noDefaultLinks.forEach(link => {
+      link.addEventListener('click', function (event) {
+        event.preventDefault(); // 阻止默认跳转行为
+        // 添加您想要执行的其他操作，比如显示特定内容、执行特定函数等
+        console.log('Clicked on link with class no-default-action');
+      });
+    });
+    console.log(this.state.type, this.state.msg, this.state.articles);
+    document.getElementById('btn-bashboard').addEventListener('click', () => {
+      this.setState({
+        type: "Charts"
+      });
+    });
+    document.getElementById('btn-charts').addEventListener('click', () => {
+      this.setState({
+        type: "Charts"
+      });
+    });
+    document.getElementById('btn-articles').addEventListener('click', () => {
+      this.setState({
+        type: 'Articles'
+      });
+    });
+    document.getElementById('btn-privacy').addEventListener('click', () => {
+      this.setState({
+        type: 'Settings'
+      });
+      console.log('privacy clicked');
+    });
   }
   render() {
-    let componentToRender;
+    let componentToRender = null;
 
     // 根据传入的Type选择要渲染的组件
-    if (Type === 'Settings') {
-      componentToRender = /*#__PURE__*/React.createElement(Settings, null);
-    }
-    if (Type === 'Articles') {
-      componentToRender = /*#__PURE__*/React.createElement(Articles, null);
-    } else {
-      componentToRender = /*#__PURE__*/React.createElement(Charts, {
-        msg: columns
+    if (this.state.type === 'Settings') {
+      componentToRender = /*#__PURE__*/React.createElement(Settings, {
+        name: this.state.name
       });
     }
-    return /*#__PURE__*/React.createElement(Container, null, componentToRender);
+    if (this.state.type === 'Articles') {
+      componentToRender = /*#__PURE__*/React.createElement(Articles, {
+        articles: this.state.articles
+      });
+    } else {
+      componentToRender = /*#__PURE__*/React.createElement(Charts, {
+        msg: this.state.msg
+      });
+    }
+    return componentToRender;
   }
 }
 
 // 渲染App组件到根节点
 
-const root = ReactDOM.creatroot(document.getElementById('root_app_admin'));
+const root = ReactDOM.createRoot(document.getElementById('root_app_admin'));
 root.render( /*#__PURE__*/React.createElement(App, {
   Type: "Charts"
 }));

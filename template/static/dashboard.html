@@ -544,22 +544,28 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" class="no-default-action" id="btn-bashboard">
-                            <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">Dashboard</span>
-                        </a>
+                        <div id="btn-bashboard">
+                            <a class="nav-link" class="no-default-action">
+                                <i class="fa fa-fw fa-dashboard"></i>
+                                <span class="nav-link-text">Dashboard</span>
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                        <a class="nav-link" class="no-default-action" id="btn-charts">
-                            <i class="fa fa-fw fa-area-chart"></i>
-                            <span class="nav-link-text">Charts</span>
-                        </a>
+                        <div id="btn-charts">
+                            <a class="nav-link" class="no-default-action">
+                                <i class="fa fa-fw fa-area-chart"></i>
+                                <span class="nav-link-text">Charts</span>
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                        <a class="nav-link" class="no-default-action" id="btn-aritcles">
-                            <i class="fa fa-fw fa-table"></i>
-                            <span class="nav-link-text">Aritcles</span>
-                        </a>
+                        <div id="btn-articles">
+                            <a class="nav-link" class="no-default-action">
+                                <i class="fa fa-fw fa-table"></i>
+                                <span class="nav-link-text">Aritcles</span>
+                            </a>
+                        </div>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
                         <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
@@ -568,12 +574,15 @@
                             <span class="nav-link-text">Settings</span>
                         </a>
                         <ul class="sidenav-second-level collapse" id="collapseComponents" style="cursor: pointer;">
+
                             <li>
-                                <a class="no-default-action" id="btn-privacy">privacy</a>
+                                <a class="no-default-action" id="btn-privacy">Privacy</a>
                             </li>
+
                             <li>
                                 <a class="no-default-action" id="btn-account">account</a>
                             </li>
+
                         </ul>
                     </li>
 
@@ -718,21 +727,11 @@
 </body>
 
 <script>
-    const noDefaultLinks = document.querySelectorAll('.no-default-action');
 
-    // 为每个链接添加点击事件监听器
-    noDefaultLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault(); // 阻止默认跳转行为
-
-            // 添加您想要执行的其他操作，比如显示特定内容、执行特定函数等
-            console.log('Clicked on link with class no-default-action');
-        });
-    });
     console.log('Admin:initail running');
     const sessionId = localStorage.getItem('sessionId');
     const userId = localStorage.getItem('id');
-    const aritcles = localStorage.getItem('articles');
+    const articles = JSON.parse(localStorage.getItem('articles'));
     window.Reactmsg = {
         msg1: 'msg1,hh',
         msg2: 'msg2,gg',
@@ -740,7 +739,7 @@
         msg4: 'msg4,sunpays',
 
     }
-    window.ReactArticles = aritcles;
+    window.ReactArticles = articles;
     console.log(userId, sessionId);
     setTimeout(() => {
         fetch(``, {
@@ -764,6 +763,6 @@
 
 
 </script>
-<script src="./react/"></script>
+<script src="./react/main.js"></script>
 
 </html>

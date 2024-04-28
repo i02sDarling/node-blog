@@ -35,7 +35,7 @@ module.exports = class ArticleItem extends React.Component {
                                         return (
                                             <tr key={index}>
                                                 <td>{article.title}</td>
-                                                <td>{article.description}</td>
+                                                <td>hhh</td>
                                                 <td>{article.date}</td>
                                                 <td>{article.content}</td>
                                             </tr>

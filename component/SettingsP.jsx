@@ -1,12 +1,11 @@
 const React = require('react');
 
-module.exports = class ArticleItem extends React.Component {
+module.exports = class Settings extends React.Component {
     render() {
-        const Articles = this.props.articles
         return (
             <div className="card mb-3">
                 <div className="card-header">
-                    <i className="fa fa-area-chart"></i> Privaty
+                    <i className="fa fa-area-chart"></i> {this.props.name}
                 </div>
                 <div className="card-body">
                     <div className="row">
