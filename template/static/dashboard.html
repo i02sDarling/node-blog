@@ -544,19 +544,19 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" class="no-default-action" id="btn-bashboard">
                             <i class="fa fa-fw fa-dashboard"></i>
                             <span class="nav-link-text">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" class="no-default-action" id="btn-charts">
                             <i class="fa fa-fw fa-area-chart"></i>
                             <span class="nav-link-text">Charts</span>
                         </a>
                     </li>
                     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" class="no-default-action" id="btn-aritcles">
                             <i class="fa fa-fw fa-table"></i>
                             <span class="nav-link-text">Aritcles</span>
                         </a>
@@ -567,12 +567,12 @@
                             <i class="fa fa-fw fa-wrench"></i>
                             <span class="nav-link-text">Settings</span>
                         </a>
-                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                        <ul class="sidenav-second-level collapse" id="collapseComponents" style="cursor: pointer;">
                             <li>
-                                <a href="/">privaty</a>
+                                <a class="no-default-action" id="btn-privacy">privacy</a>
                             </li>
                             <li>
-                                <a href="/">accout</a>
+                                <a class="no-default-action" id="btn-account">account</a>
                             </li>
                         </ul>
                     </li>
@@ -588,7 +588,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <a class="nav-link" data-toggle="modal" data-target="#exampleModal" id="btn-logout">
                             <i class="fa fa-fw fa-sign-out"></i>Logout</a>
                     </li>
                 </ul>
@@ -708,7 +708,7 @@
                         </div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                            <a class="btn btn-primary" href="/admin">Logout</a>
+                            <a class="btn btn-primary" class="no-default-action">Logout</a>
                         </div>
                     </div>
                 </div>
@@ -718,9 +718,29 @@
 </body>
 
 <script>
+    const noDefaultLinks = document.querySelectorAll('.no-default-action');
+
+    // 为每个链接添加点击事件监听器
+    noDefaultLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault(); // 阻止默认跳转行为
+
+            // 添加您想要执行的其他操作，比如显示特定内容、执行特定函数等
+            console.log('Clicked on link with class no-default-action');
+        });
+    });
     console.log('Admin:initail running');
     const sessionId = localStorage.getItem('sessionId');
     const userId = localStorage.getItem('id');
+    const aritcles = localStorage.getItem('articles');
+    window.Reactmsg = {
+        msg1: 'msg1,hh',
+        msg2: 'msg2,gg',
+        msg3: 'msg3,suki',
+        msg4: 'msg4,sunpays',
+
+    }
+    window.ReactArticles = aritcles;
     console.log(userId, sessionId);
     setTimeout(() => {
         fetch(``, {
@@ -744,5 +764,6 @@
 
 
 </script>
+<script src="./react/"></script>
 
 </html>

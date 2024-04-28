@@ -46,7 +46,7 @@ module.exports = class Charts extends React.Component {
                             <div className="card-body-icon">
                                 <i className="fa fa-fw fa-shopping-cart"></i>
                             </div>
-                            <div className="mr-5">{msg.msg2}</div>
+                            <div className="mr-5">{msg.msg3}</div>
                         </div>
                         <a className="card-footer text-white clearfix small z-1" href="#">
                             <span className="float-left">View Details</span>

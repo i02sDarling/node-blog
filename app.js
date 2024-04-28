@@ -1,3 +1,4 @@
+
 const path = require('path');
 const fs = require('fs');
 const koa = require('koa');
@@ -8,7 +9,6 @@ const app = new koa();
 const getPage = require('./front-data/getPage.js')
 const getArticle = require('./front-data/getArticleMsg.js')
 const Template = require('./template/template.js')
-const articleTemplate = require('./template/template.js')(path.join(staticPath, 'article.html'))
 const HomePage = require('./template/Home.js');
 const getData = require('./request/get-data.js')
 const bodyParser = require('koa-bodyparser');
