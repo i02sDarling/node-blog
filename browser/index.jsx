@@ -3,7 +3,7 @@ const ReactDOM = require('react-dom/client');
 
 const Articles = require('../component/Articles.jsx');
 const Charts = require('../component/Charts.jsx');
-const Settings = require('../component/SettingsP.jsx');
+const Settings = require('../component/Settings.jsx');
 
 
 class App extends React.Component {
@@ -13,7 +13,7 @@ class App extends React.Component {
         articles: ReactArticles,
         name: 'Privacy'
     }
-    componentDidMount() {
+    disabledA() {
         const noDefaultLinks = document.querySelectorAll('.no-default-action');
 
         // 为每个链接添加点击事件监听器
@@ -24,6 +24,9 @@ class App extends React.Component {
                 console.log('Clicked on link with class no-default-action');
             });
         });
+    }
+    componentDidMount() {
+
         console.log(this.state.type, this.state.msg, this.state.articles)
         document.getElementById('btn-bashboard').addEventListener('click', () => { this.setState({ type: "Charts" }) })
         document.getElementById('btn-charts').addEventListener('click', () => { this.setState({ type: "Charts" }) })
@@ -34,17 +37,22 @@ class App extends React.Component {
     }
 
     render() {
+        console.log(this.state.type);
+        let tag = 1;
         let componentToRender = null;
 
         // 根据传入的Type选择要渲染的组件
         if (this.state.type === 'Settings') {
+            tag = 2;
             componentToRender = <Settings name={this.state.name} />;
         } if (this.state.type === 'Articles') {
+            tag = 3;
             componentToRender = <Articles articles={this.state.articles} />;
-        } else {
+        } else if (this.state.type === 'Charts') {
+            tag = 4;
             componentToRender = <Charts msg={this.state.msg} />;
         }
-
+        console.log('tag:', tag);
         return (
             componentToRender
         )

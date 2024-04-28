@@ -140,22 +140,24 @@ module.exports = class Charts extends React.Component {
 
 /***/ }),
 
-/***/ "./component/SettingsP.jsx":
-/*!*********************************!*\
-  !*** ./component/SettingsP.jsx ***!
-  \*********************************/
+/***/ "./component/Settings.jsx":
+/*!********************************!*\
+  !*** ./component/Settings.jsx ***!
+  \********************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 module.exports = class Settings extends React.Component {
   render() {
-    return /*#__PURE__*/React.createElement("div", {
+    const name = this.props.name;
+    console.log(name);
+    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
       className: "card mb-3"
     }, /*#__PURE__*/React.createElement("div", {
       className: "card-header"
     }, /*#__PURE__*/React.createElement("i", {
       className: "fa fa-area-chart"
-    }), " ", this.props.name), /*#__PURE__*/React.createElement("div", {
+    }), " Privacy"), /*#__PURE__*/React.createElement("div", {
       className: "card-body"
     }, /*#__PURE__*/React.createElement("div", {
       className: "row"
@@ -177,7 +179,9 @@ module.exports = class Settings extends React.Component {
       "aria-describedby": "addon-wrapping"
     }))), /*#__PURE__*/React.createElement("div", {
       className: "row",
-      style: "margin-top: 20px;"
+      style: {
+        marginTop: '20px'
+      }
     }, /*#__PURE__*/React.createElement("div", {
       className: "input-group flex-nowrap"
     }, /*#__PURE__*/React.createElement("button", {
@@ -195,7 +199,7 @@ module.exports = class Settings extends React.Component {
       className: "col-2"
     }))), /*#__PURE__*/React.createElement("div", {
       className: "card-footer small text-muted"
-    }, "Updated yesterday at 02:59 PM"));
+    }, "Updated yesterday at 02:59 PM")));
   }
 };
 
@@ -33686,7 +33690,7 @@ const React = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const ReactDOM = __webpack_require__(/*! react-dom/client */ "./node_modules/react-dom/client.js");
 const Articles = __webpack_require__(/*! ../component/Articles.jsx */ "./component/Articles.jsx");
 const Charts = __webpack_require__(/*! ../component/Charts.jsx */ "./component/Charts.jsx");
-const Settings = __webpack_require__(/*! ../component/SettingsP.jsx */ "./component/SettingsP.jsx");
+const Settings = __webpack_require__(/*! ../component/Settings.jsx */ "./component/Settings.jsx");
 class App extends React.Component {
   state = {
     type: this.props.Type,
@@ -33694,7 +33698,7 @@ class App extends React.Component {
     articles: ReactArticles,
     name: 'Privacy'
   };
-  componentDidMount() {
+  disabledA() {
     const noDefaultLinks = document.querySelectorAll('.no-default-action');
 
     // 为每个链接添加点击事件监听器
@@ -33705,6 +33709,8 @@ class App extends React.Component {
         console.log('Clicked on link with class no-default-action');
       });
     });
+  }
+  componentDidMount() {
     console.log(this.state.type, this.state.msg, this.state.articles);
     document.getElementById('btn-bashboard').addEventListener('click', () => {
       this.setState({
@@ -33729,23 +33735,29 @@ class App extends React.Component {
     });
   }
   render() {
+    console.log(this.state.type);
+    let tag = 1;
     let componentToRender = null;
 
     // 根据传入的Type选择要渲染的组件
     if (this.state.type === 'Settings') {
+      tag = 2;
       componentToRender = /*#__PURE__*/React.createElement(Settings, {
         name: this.state.name
       });
     }
     if (this.state.type === 'Articles') {
+      tag = 3;
       componentToRender = /*#__PURE__*/React.createElement(Articles, {
         articles: this.state.articles
       });
-    } else {
+    } else if (this.state.type === 'Charts') {
+      tag = 4;
       componentToRender = /*#__PURE__*/React.createElement(Charts, {
         msg: this.state.msg
       });
     }
+    console.log('tag:', tag);
     return componentToRender;
   }
 }
