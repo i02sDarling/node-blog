@@ -649,25 +649,25 @@
 </body>
 
 <script>
-    console.log('running');
+    console.log('Admin:initail running');
     const sessionId = localStorage.getItem('sessionId');
     setTimeout(() => {
-        fetch(``,{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ sessionId:sessionId, })
-      })
-      .then(res => res.json())
-      .then(data=>{
-        const {msg}=data;
-        console.log(msg);
-      })
-      
-      
+        fetch(``, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ sessionId: sessionId, })
+        })
+            .then(res => res.json())
+            .then(data => {
+                const { msg } = data;
+                console.log(msg);
+            })
+
+
     }, 500);
-    
+
 
 </script>
 

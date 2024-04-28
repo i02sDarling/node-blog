@@ -4,7 +4,7 @@ const protobuf = require('protocol-buffers');
 const schemas = protobuf(
     fs.readFileSync(`${__dirname}/user.proto`)
 );
-const userData = require('./mockdata/userData');
+
 
 
 
@@ -20,7 +20,7 @@ server.createServer((request, response) => {
         });
     })
     .listen(3001, () => {
-        console.log('rpc server listened: 3001')
+        console.log('Server:RPC server listened: 3001')
     });
 
 

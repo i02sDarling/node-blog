@@ -12,7 +12,7 @@ const articleTemplate = require('./template/template.js')(path.join(staticPath, 
 const HomePage = require('./template/Home.js');
 const getData = require('./request/get-data.js')
 const bodyParser = require('koa-bodyparser');
-const { verify } = require('crypto');
+
 // const convert=require('./data/converMdToHtml.js')
 
 // await getData(+(ctx.query.sort || 0), +(ctx.query.filt || 0));
@@ -94,15 +94,15 @@ app.use(
 app.use(
     mount('/vertifyed', async (ctx, next) => {
         if (ctx.method === 'POST') {
-            if(ctx.request.body){
+            if (ctx.request.body) {
                 const { sessionId } = ctx.request.body;
-                let msg=sessionId;
-                ctx.body = {msg}; 
+                let msg = sessionId;
+                ctx.body = { msg };
             }
-            
+
         } else {
-            let root_app='hh';
-            let tems={};
+            let root_app = 'hh';
+            let tems = {};
             // tems.rootApp='hh';
             // tems[`rootApp`]='hh';
             // console.log(tems);
@@ -143,9 +143,8 @@ app.use(
             });
             templateParams[`component_header`] = header;
             templateParams[`nextPageURL`] = pageInfo.nextUrl;
-            console.log(templateParams);
             ctx.body = Template(path.join(staticPath, 'template.html'))(templateParams);
-            
+
         }
     })
 );
@@ -160,4 +159,4 @@ app.use(
 //fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
 
 app.listen(3000);
-console.log("App is rungning at prot 3000,you can use `node server` to start necessry service later")
+console.log("App:App is rungning at prot 3000,you can use `node server` to start necessry service later")
