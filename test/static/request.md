@@ -1,5 +1,5 @@
 ## Head
-> [FuctionisExceedSevenDays](#FuctionisExceedSevenDays) > [T2](#T2) > [T3](#T3) > [T4](#T4) > [T5](#T5) > [T6](#T6) > [T7](#T7) >[T8](#T8)> [T9](#T9)> [T-10](#T-10)> [T-11](#T-11) > [T-12](#T-12)> [T-13](#T-13)
+> [FuctionisExceedSevenDays](#FuctionisExceedSevenDays) > [超过七天吗](#超过七天吗) > [T3](#T3) > [T4](#T4) > [T5](#T5) > [T6](#T6) > [T7](#T7) >[T8](#T8)> [T9](#T9)> [T-10](#T-10)> [T-11](#T-11) > [T-12](#T-12)> [T-13](#T-13)
 ---
 ### FuctionisExceedSevenDays[^](#Head)
 ```js
@@ -11,7 +11,50 @@
 // console.log('超过七天吗？', isExceedSevenDays(timestamp1, timestamp2));
 ```
 ---
-### T2[^](#Head)
+### 超过七天吗[^](#Head)
+```cpp
+/*
+*/
+
+const sessionIdList = require('./sessionId');
+
+console.log(Date.now() - 24 * 60 * 60 * 1000 * 7-1000);
+
+console.log(vertifySessionId(1, "b5717e0770365bbf3c15f5bdffae7b542c577c6a7d0dc73bafdf8f7208c0e6ab"));
+function isExceedSevenDays(timestamp1, timestamp2) {
+    const millisecondsInOneDay = 24 * 60 * 60 * 1000;
+    const diffDays = Math.abs(timestamp1 - timestamp2) / millisecondsInOneDay;
+    return diffDays > 7;
+}
+
+1713676922485
+true false false
+PS D:\node-blog\node-blog> node ./request/vertifySessionId
+1713676953131
+true false false
+true
+PS D:\node-blog\node-blog> node ./request/vertifySessionId
+1713676976531
+true false false
+true
+PS D:\node-blog\node-blog> node ./request/vertifySessionId
+1713677020921
+true false false
+true
+PS D:\node-blog\node-blog> node ./request/vertifySessionId
+1713677038395
+true false false
+true
+PS D:\node-blog\node-blog> node ./request/vertifySessionId
+1713590772321
+true false false
+true
+PS D:\node-blog\node-blog> node ./request/vertifySessionId
+1713590784029
+true false false
+true
+```
+
 ---
 ### T3[^](#Head)
 ---

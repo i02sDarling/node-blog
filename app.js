@@ -12,6 +12,7 @@ const articleTemplate = require('./template/template.js')(path.join(staticPath, 
 const HomePage = require('./template/Home.js');
 const getData = require('./request/get-data.js')
 const bodyParser = require('koa-bodyparser');
+const vertifySessionId = require('./request/vertifySessionId');
 
 // const convert=require('./data/converMdToHtml.js')
 
@@ -95,18 +96,13 @@ app.use(
     mount('/vertifyed', async (ctx, next) => {
         if (ctx.method === 'POST') {
             if (ctx.request.body) {
-                const { sessionId } = ctx.request.body;
-                let msg = sessionId;
+                const { userId, sessionId } = ctx.request.body;
+                let msg = vertifySessionId(userId, sessionId);
                 ctx.body = { msg };
             }
 
         } else {
-            let root_app = 'hh';
-            let tems = {};
-            // tems.rootApp='hh';
-            // tems[`rootApp`]='hh';
-            // console.log(tems);
-            // ctx.body = Template(path.join(staticPath,'dashboard.html'))(tems);
+            // ctx.body = Template(path.join(staticPath, 'dashboard.html'))({ tems });
             ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'dashboard.html'), 'utf-8');
         }
         // admin Post
@@ -143,6 +139,7 @@ app.use(
             });
             templateParams[`component_header`] = header;
             templateParams[`nextPageURL`] = pageInfo.nextUrl;
+            console.log(templateParams);
             ctx.body = Template(path.join(staticPath, 'template.html'))(templateParams);
 
         }

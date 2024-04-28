@@ -1,6 +1,11 @@
 
 ### 页面展示
 
+#### Day4-28
+
+**vertifyed**
+![alt text](./assets/image/image-4.png)
+
 #### Day4-26
 **index**
 ![alt text](./assets/image/image-1.png)
