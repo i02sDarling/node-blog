@@ -1,13 +1,4 @@
-需求分析
 
-/ 根目录 list 优化 每个标题 发布时间 做成mockdata
-/article 
-/resume pdf 
+## 主线分支已更改
 
-
-技术预研
-
-koa 
-koa-mount
-koa-static
-nodemon 热更新工具
+由于本项目初期在[StackBlitz](https://stackblitz.com/)开发，由于Node版本不一致导致的错误,故将项目移交到[localdevlopment](https://github.com/jiuyue1368458/node-blog/tree/localdevlopment)分支开发
