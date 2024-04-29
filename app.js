@@ -155,5 +155,5 @@ app.use(
 
 //fetch(`./data?sort=${this.state.sortType}&filt=${filtType}`)
 
-app.listen(80);
-console.log("App:App is rungning at prot 3000,you can use `node server` to start necessry service later")
+app.listen(3000);
+console.log("App:App is rungning at prot 3000")
