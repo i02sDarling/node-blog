@@ -3,8 +3,8 @@ const cluster = require('cluster');
 const path = require('path');
 
 if (cluster.isMaster) {
-    for (let i = 0; i < Math.floor(require('os').cpus().length / 2); i++) {
-
+    // for (let i = 0; i < Math.floor(require('os').cpus().length / 2); i++) {
+    for (let i = 0; i < Math.floor(require('os').cpus().length); i++) {
         createWorker();
         // createWorker('app.js');
     }
