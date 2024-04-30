@@ -28,6 +28,7 @@ app.use(
 
 app.use(
     mount('/resume', serveStatic(path.join(__dirname, staticPath, 'Resume-index.html')))
+    // mount('/resume', serveStatic(path.join(__dirname, staticPath, 'resume.pdf')))
 );
 app.use(
     mount('/svg', serveStatic(path.join(__dirname, staticPath, 'Svg-nodejs.html')))
@@ -44,7 +45,7 @@ app.use(
 
 app.use(async (ctx, next) => {
     if (ctx.url === '/resume') {
-        // ctx.body = fs.readFileSync(path.join(__dirname, staticPath,'resume.pdf'));
+        // ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'resume.pdf'), 'utf-8');
         ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'Resume-index.html'), 'utf-8');
     } else if (ctx.url === '/svg') {
         ctx.body = fs.readFileSync(path.join(__dirname, staticPath, 'Svg-nodejs.html'), 'utf-8')
@@ -139,7 +140,6 @@ app.use(
             });
             templateParams[`component_header`] = header;
             templateParams[`nextPageURL`] = pageInfo.nextUrl;
-            console.log(templateParams);
             ctx.body = Template(path.join(staticPath, 'template.html'))(templateParams);
 
         }
