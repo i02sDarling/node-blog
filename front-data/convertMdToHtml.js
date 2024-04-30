@@ -1,7 +1,7 @@
 const fs = require('fs');
 const marked = require('marked');
 const originData = require('./originData');
-// convert() //node ./front-data/convertMdToHtml 取消注释
+// convert() //node front-data/convertMdToHtml 取消注释
 function convert() {
     const content = [];
     originData.map(item => {
