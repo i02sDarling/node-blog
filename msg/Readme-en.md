@@ -1,0 +1,3 @@
+Tech stack: Webpack+Nodejs+Koa+Protobuf+Easysock+React+Bootstrap+Docker+Nginx
+
+Technical focus: including articles, daily sentences, resumes, mind maps and other functions, pseudo-background using RPC (EasySock) based on custom protocol (ProtoBuf) for communication, administrator page (login function), authentication based on LocalStorage and SessionId, page re-rendering through React, web page through Nodejs sub-process to optimize the above home rendering time, through process daemon (cluster) With a heartbeat to ensure the robustness of the project operation. The image is based in Base64 mode to reduce the number of requests, and the project packaging is customized through Webpack to reduce the packaging time.
