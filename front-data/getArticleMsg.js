@@ -28,11 +28,11 @@ function getMsg(id) {
 
 
     }
-    let lastURL = (id - 1) === 0 ? '/' : '/article?articleId=' + (id - 1);
-    let nextURL = (id + 1) > Max ? '/' : 'article?articleId=' + (id + 1);
+    let lastURL = (id - 2) < 0 ? '/' : '/article?articleId=' + (id - 1);
+    let nextURL = (id) >= Max - 1 ? '/' : 'article?articleId=' + (id + 1);
     let pay = '/pay';
-    let next = (id + 1) > Max ? '未完待续' : Titles[id + 1];
-    let last = (id - 1) === 0 ? '前边没有咯' : Titles[id - 1];
+    let next = (id) >= Max - 1 ? '未完待续' : Titles[id];//从0开始 tit[max-1]结束
+    let last = (id - 2) < 0 ? '前边没有咯' : Titles[id - 2];
     return {
         last,
         lastURL,
